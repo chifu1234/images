@@ -21,12 +21,12 @@ jobs:
       - name: bla
         run: tree
       - name: Compress txt with gzip
-          uses: coco-hkk/compress-action@v2.1
-          id: step1
-          with:
-            file-suffix: 'qcow2'
-            target-directory-path: 'output'
-            compress-tool: 'gzip'
+        uses: coco-hkk/compress-action@v2.1
+        id: step1
+        with:
+          file-suffix: 'qcow2'
+          target-directory-path: 'output'
+          compress-tool: 'gzip'
       - name:  bla
         run: tree
       - name: Create release
