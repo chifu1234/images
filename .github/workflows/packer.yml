@@ -1,0 +1,41 @@
+---
+
+name: Packer
+
+on:
+  push:
+
+jobs:
+  packer:
+    runs-on: ubuntu-latest
+    name: packer
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Packer build
+        uses: enr0s/packer-qemu-action@v1.0
+        with:
+          templateFile: './flatcar-packer-qemu/flatcar-linux.json'
+          workingDir: '.'
+      - name: bla
+        run: tree
+      - name: Compress txt with gzip
+          uses: coco-hkk/compress-action@v2.1
+          id: step1
+          with:
+            file-suffix: 'qcow2'
+            target-directory-path: 'output'
+            compress-tool: 'gzip'
+      - name:  bla
+        run: tree
+      - name: Create release
+        uses: Roang-zero1/github-create-release-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create GitHub release
+        uses: Roang-zero1/github-upload-release-artifacts-action@master
+        with:
+          args:
+          - output/flatcar-linux.qcow2.gz 
+          - output/flatcar-linux.qcow2

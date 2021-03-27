@@ -15,13 +15,12 @@
             "type": "qemu",
 	    "iso_url": "https://stable.release.flatcar-linux.net/amd64-usr/current/flatcar_production_iso_image.iso",
             "iso_checksum": "6d809b37610f5b7a52a03aa8b125b762",
-            "iso_checksum_type": "md5",
             "output_directory": "builds",
             "shutdown_command": "sudo shutdown now",
             "disk_size": "{{ user `disk_size` }}",
             "format": "qcow2",
             "accelerator": "kvm",
-            "vm_name": "flatcar-linux-{{user `flatcar_channel` }}.qcow2",
+            "vm_name": "flatcar-linux.qcow2",
             "boot_wait": "{{user `boot_wait` }}",
             "ssh_username": "core",
             "ssh_password": "packer",
@@ -41,13 +40,13 @@
     "provisioners": [
         {
             "type": "file",
-            "source": "ignition.json",
-            "destination": "/tmp/ignition.json"
+            "source": "cloud-init.yml",
+            "destination": "/home/core/cloud-init.yml"
         },
         {
             "type": "shell",
             "inline": [
-                "sudo flatcar-install -d /dev/vda -C {{ user `flatcar_channel` }} -i /tmp/ignition.json"
+                "sudo flatcar-install -s -c ./cloud-init.yml"
             ]
         }
     ],
