@@ -20,6 +20,8 @@ jobs:
         with:
           image: tonistiigi/binfmt:latest
           platforms: all
+      - name: sdf
+        run: apt update && apt install packer -y && packer flatcar/flatcar-linux.json
       - name: Build Artifact
         uses: hashicorp/packer-github-actions@master
         with:
