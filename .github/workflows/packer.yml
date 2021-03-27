@@ -13,11 +13,21 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Packer build
-        uses: enr0s/packer-qemu-action@v1.0
+      -
+        name: Set up QEMU
+        id: qemu
+        uses: docker/setup-qemu-action@v1
         with:
-          templateFile: './flatcar-packer-qemu/flatcar-linux.json'
-          workingDir: '.'
+          image: tonistiigi/binfmt:latest
+          platforms: all
+      - name: Build Artifact
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: build
+          arguments: "-color=false -on-error=abort"
+          target: flatcar-packer-qemu/flatcar-linux.json 
+        env:
+          PACKER_LOG: 1
       - name: bla
         run: tree
       - name: Compress txt with gzip
