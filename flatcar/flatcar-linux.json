@@ -13,7 +13,7 @@
     "builders": [
         {
             "type": "qemu",
-	    "iso_url": "https://stable.release.flatcar-linux.net/amd64-usr/current/flatcar_production_iso_image.iso",
+      	    "iso_url": "https://stable.release.flatcar-linux.net/amd64-usr/current/flatcar_production_iso_image.iso",
             "iso_checksum": "6d809b37610f5b7a52a03aa8b125b762",
             "output_directory": "builds",
             "shutdown_command": "sudo shutdown now",
@@ -48,15 +48,6 @@
             "inline": [
                 "sudo flatcar-install -s -c ./cloud-init.yml"
             ]
-        }
-    ],
-
-    "post-processors": [
-        {
-            "type": "vagrant",
-            "keep_input_artifact": true,
-            "output": "builds/flatcar-{{user `flatcar_channel`}}-{{user `flatcar_version`}}-{{.Provider}}.box",
-            "vagrantfile_template": "Vagrantfile.template"
         }
     ]
 }
