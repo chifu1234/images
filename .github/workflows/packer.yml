@@ -21,7 +21,7 @@ jobs:
           image: tonistiigi/binfmt:latest
           platforms: all
       - name: sdf
-        run: sudo apt update && sudo apt install packer -y && packer build flatcar/flatcar-linux.json
+        run: sudo apt update && sudo apt install qemu-system packer -y && packer build flatcar/flatcar-linux.json
       - name: Build Artifact
         uses: hashicorp/packer-github-actions@master
         with:
