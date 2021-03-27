@@ -37,5 +37,4 @@ jobs:
         uses: Roang-zero1/github-upload-release-artifacts-action@master
         with:
           args:
-          - output/flatcar-linux.qcow2.gz 
-          - output/flatcar-linux.qcow2
+          - output/
