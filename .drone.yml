@@ -2,6 +2,28 @@
 kind: pipeline
 name: Image Builds 
 steps:
+- name: restore
+  image: plugins/s3-cache
+  settings:
+    pull: true
+    endpoint: 
+      from_secret: "s3_server_internal"
+    access_key: 
+      from_secret: "s3_access_key"
+    secret_key: 
+      from_secret: "s3_secret_key"
+    restore: true
+
+
+
+
+- name: Build Images
+  image: alpine
+  commands:
+  - apk update && apk add git bash curl jq qemu gzip qemu-system-x86_64 qemu-img 
+  - apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing packer
+  - bash ./build.sh
+
 - name: Release Images
   image: alpine
   commands:
@@ -11,6 +33,11 @@ steps:
   environment:
     GITHUB_TOKEN:
       from_secret: "github_api_token"
+
+
+
+
+
 trigger:
   event:
   - push
