@@ -45,5 +45,5 @@ trigger:
   - kkl
   - drone
 
-node:
-  location: glk
+#node:
+#  location: glk
