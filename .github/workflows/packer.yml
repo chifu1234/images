@@ -18,6 +18,11 @@ jobs:
         #        with:
         #          templateFile: 'flatcar/flatcar-linux.json'
         #          workingDir: '.'
+      - name: Packer build
+        uses: riznob/packer-build-action@v1.1
+        with:
+          templateFile: 'flatcar/flatcar-linux.json'
+          workingDir: '.'
       - name: blu
         run: tree
       -
