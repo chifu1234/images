@@ -15,27 +15,26 @@ steps:
     restore: true
 
 
-
-
-- name: Build Images
-  image: alpine
-  commands:
-  - apk update && apk add git bash curl jq qemu gzip qemu-system-x86_64 qemu-img 
-  - apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing packer
-  - bash ./build.sh
-
 - name: Release Images
-  image: alpine
+  image: ubuntu
   commands:
-  - apk update && apk add git bash curl jq qemu gzip qemu-system-x86_64 qemu-img 
-  - apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing packer
-  - bash ./build.sh
+  - sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+  - sudo apt-add-repository https://cli.github.com/packages
+  - sudo apt update
+  - sudo apt install bash curl jq gh
+  - ls -lah
+  - gh -h 
   environment:
     GITHUB_TOKEN:
       from_secret: "github_api_token"
 
 
-
+#- name: Build Images
+#  image: alpine
+#  commands:
+#  - apk update && apk add git bash curl jq qemu gzip qemu-system-x86_64 qemu-img 
+#  - apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing packer
+#  - bash ./build.sh
 
 
 trigger:
@@ -44,6 +43,7 @@ trigger:
   branch:
   - main
   - kkl
+  - drone
 
 node:
   location: glk
