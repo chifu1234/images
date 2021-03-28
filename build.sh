@@ -44,12 +44,10 @@ do
       then
         new_release+=("$i-$v")
         #PACKER_LOG=1 packer build -var-file $v ${i}${i%/}.json
-        mkdir ./tmp
-        touch ./tmp/${version}.qcow2
         gzip ./tmp/${version}.qcow2
         mv ./tmp/${version}.qcow2.gz ${build_dir}
         rm ./tmp -rf
-        text="new version for ${i%/} in version ${v##*/}"
+        text="new version for ${i%/} in version ${tversion}"
         release_id=$(curl --data "$(post_data)" "https://api.github.com/repos/$repo_full_name/releases?access_token=$token" | jq .id)
         curl --data-binary @${build_dir}/${version}.qcow2.gz -H  "Content-Type: application/octet-stream" "https://uploads.github.com/repos/$repo_full_name/releases/$release_id/assets?name=${version}.qcow2.gz&access_token=$token"
       else
