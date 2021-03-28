@@ -7,7 +7,7 @@
         "disk_size": "40000",
         "memory": "2048M",
         "boot_wait": "45s",
-        "headless": "false"
+        "headless": "true"
     },
 
     "builders": [
