@@ -28,6 +28,7 @@ sudo apt install qemu qemu-system gzip -y
 # fetch all tags
 git fetch --all --tags
 
+mkdir ${build_dir}
 # searching for new releases
 #
 for i in */
@@ -41,11 +42,12 @@ do
       then
         new_release+=("$i-$v")
         PACKER_LOG=1 packer build -var-file $v ${i}${i%/}.json
-        gzip ./build/${version}.qcow2
+        gzip ./tmp/${version}.qcow2
+        mv ./tmp/${version}.qcow2 ./${build_dir}
         text="new version for ${i%/} in version ${v##*/}"
         release_id=$(curl --data "$(post_data)"
         "https://api.github.com/repos/$repo_full_name/releases?access_token=$token" | jq uploader.id )
-        curl --data-binary @./build/${version}.qcow2.gz -H  "Content-Type: application/octet-stream" "https://uploads.github.com/repos/$repo_full_name/releases/$release_id/assets?name=${version}.qcow2.gz&access_token=$token"
+        curl --data-binary @./${build_dir}/${version}.qcow2.gz -H  "Content-Type: application/octet-stream" "https://uploads.github.com/repos/$repo_full_name/releases/$release_id/assets?name=${version}.qcow2.gz&access_token=$token"
       else
         echo "$i-$v exists..."
       fi
