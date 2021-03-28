@@ -1,0 +1,10 @@
+language: c
+
+cache: ccache
+sudo: false
+
+script:
+  - bash -e travis-qemu.sh
+  - bash -e travis-qemu.sh
+after_script:
+  - $HOME/qemu/bin/qemu-img --version
