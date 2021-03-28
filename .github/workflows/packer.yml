@@ -4,8 +4,8 @@ name: Packer
 
 on:
   push:
-    tags:
-      - v*
+    branch:
+      - kkl
 
 jobs:
   packer:
