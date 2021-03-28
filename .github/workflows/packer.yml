@@ -18,13 +18,13 @@ jobs:
         #        with:
         #          templateFile: 'flatcar/flatcar-linux.json'
         #          workingDir: '.'
-      - name: Packer build
-        uses: riznob/packer-build-action@v1.1
-        with:
-          templateFile: 'flatcar/flatcar-linux.json'
-          workingDir: '.'
-      - name: blu
-        run: tree
+        #      - name: Packer build
+        #        uses: riznob/packer-build-action@v1.1
+        #        with:
+        #          templateFile: 'flatcar/flatcar-linux.json'
+        #          workingDir: '.'
+        #      - name: blu
+        #        run: tree
       -
         name: Set up QEMU
         id: qemu
@@ -32,6 +32,8 @@ jobs:
         with:
           image: tonistiigi/binfmt:latest
           platforms: all
+      - name: bla
+        run: tree
       - name: sdf
         run: sudo apt update && sudo apt install qemu qemu-utils qemu-kvm virt-manager libvirt-daemon-system libvirt-clients bridge-utils -y && PACKER_LOG=1 packer build flatcar/flatcar-linux.json
       - name: Build Artifact
