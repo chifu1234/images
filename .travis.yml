@@ -6,7 +6,7 @@ sudo: false
 script:
   - bash -e travis-qemu.sh
   - bash -e travis-qemu.sh
-  - sudo apt update && sudo apt install packer -y
+  - sudo apt update && sudo apt install packer qemu -y
   - packer build flatcar/flatcar-linux.json
 after_script:
   - $HOME/qemu/bin/qemu-img --version
