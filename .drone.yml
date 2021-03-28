@@ -1,6 +1,6 @@
 ---
 kind: pipeline
-name: flatcar-build
+name: Image Builds 
 steps:
 - name: Release Images
   image: alpine
