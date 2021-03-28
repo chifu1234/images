@@ -5,6 +5,7 @@ name: Packer
 on:
   push:
     tags:
+      - v*
 
 jobs:
   packer:
