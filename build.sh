@@ -42,7 +42,8 @@ do
       if [[ "$r" != "$version" ]]
       then
         new_release+=("$i-$v")
-        PACKER_LOG=1 packer build -var-file $v ${i}${i%/}.json
+        #PACKER_LOG=1 packer build -var-file $v ${i}${i%/}.json
+        touch ./tmp/${version}.qcow2
         gzip ./tmp/${version}.qcow2
         mv ./tmp/${version}.qcow2 ./${build_dir}
         text="new version for ${i%/} in version ${v##*/}"
