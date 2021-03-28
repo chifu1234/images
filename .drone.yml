@@ -45,3 +45,5 @@ trigger:
   - main
   - kkl
 
+node:
+  location: glk
