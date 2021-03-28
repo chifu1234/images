@@ -36,8 +36,8 @@ do
   do
     for r in `git tag`
     do
-       version="${i%/}-${v##*/}"
-      if [[ "$r" -ne "$version" ]]
+      version="${i%/}-${v##*/}"
+      if [[ "$r" != "$version" ]]
       then
         new_release+=("$i-$v")
         PACKER_LOG=1 packer build -var-file $v ${i}${i%/}.json
