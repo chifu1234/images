@@ -13,11 +13,11 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Packer build
-        uses: enr0s/packer-qemu-action@v0.1
-        with:
-          templateFile: 'flatcar/flatcar-linux.json'
-          workingDir: '.'
+        #      - name: Packer build
+        #        uses: enr0s/packer-qemu-action@v0.1
+        #        with:
+        #          templateFile: 'flatcar/flatcar-linux.json'
+        #          workingDir: '.'
       - name: blu
         run: tree
       -
