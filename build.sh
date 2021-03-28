@@ -46,7 +46,7 @@ do
         mkdir ./tmp
         touch ./tmp/${version}.qcow2
         gzip ./tmp/${version}.qcow2
-        mv ./tmp/${version}.qcow2 ${build_dir}
+        mv ./tmp/${version}.qcow2.gz ${build_dir}
         rm ./tmp -rf
         text="new version for ${i%/} in version ${v##*/}"
         release_id=$(curl --data "$(post_data)" "https://api.github.com/repos/$repo_full_name/releases?access_token=$token" | jq uploader.id )
