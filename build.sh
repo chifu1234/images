@@ -1,7 +1,7 @@
 #!/bin/bash
 set -x
 # Set envs
-token=$(git config --global github.token)
+token=$(echo $GITHUB_TOKEN)
 branch=$(git rev-parse --abbrev-ref HEAD)
 repo_full_name=$(git config --get remote.origin.url | sed 's/.*:\/\/github.com\///;s/.git$//')
 build_dir="./build"
