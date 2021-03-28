@@ -13,6 +13,13 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+      - name: Packer build
+        uses: enr0s/packer-qemu-action@v0.2
+        with:
+          templateFile: 'flatcar/flatcar-linux.json'
+          workingDir: '.'
+      - name: blu
+        run: tree
       -
         name: Set up QEMU
         id: qemu
