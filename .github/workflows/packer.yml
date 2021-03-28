@@ -33,7 +33,7 @@ jobs:
           image: tonistiigi/binfmt:latest
           platforms: all
       - name: bla
-        run: tree && docker ps
+        run: tree && docker ps && docker run -it -e PACKER_LOG=1 --rm --privileged -v `pwd`:/opt/ goffinet/packer-qemu build flatcar/flatcar-linux.json
       - name: sdf
         run: sudo apt update && sudo apt install qemu qemu-utils qemu-kvm virt-manager libvirt-daemon-system libvirt-clients bridge-utils -y && PACKER_LOG=1 packer build flatcar/flatcar-linux.json
       - name: Build Artifact
