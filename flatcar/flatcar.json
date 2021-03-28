@@ -6,7 +6,7 @@
         "iso_checksum_type": "md5sum",
         "disk_size": "40000",
         "memory": "2048M",
-        "boot_wait": "45s",
+        "boot_wait": "345s",
         "headless": "true",
         "version": ""
     },
@@ -20,7 +20,7 @@
             "shutdown_command": "sudo shutdown now",
             "disk_size": "{{ user `disk_size` }}",
             "format": "qcow2",
-            "accelerator": "kvm",
+            "accelerator": "none",
             "vm_name": "flatcar-{{ user `version` }}.qcow2",
             "boot_wait": "{{user `boot_wait` }}",
             "ssh_username": "core",
