@@ -22,10 +22,6 @@ post_data()
 EOF
 }
 
-# Install deps
-sudo apt update
-sudo apt install qemu qemu-system gzip -y
-
 # fetch all tags
 git fetch --all --tags
 
