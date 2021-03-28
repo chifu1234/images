@@ -38,8 +38,8 @@ do
   do
     for r in `git tag`
     do
-      tversion="${i%/}-${v##*/}"
-      version=$(cat $v | jq .version | sed -e 's/\"//g')
+      tversion=$(cat $v | jq .version | sed -e 's/\"//g')
+      version=$(echo ${i%/}-${tversion})
       if [[ "$r" != "$version" ]]
       then
         new_release+=("$i-$v")
