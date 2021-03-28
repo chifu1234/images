@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -x
 # Set envs
 token=$(git config --global github.token)
 branch=$(git rev-parse --abbrev-ref HEAD)
@@ -22,7 +22,6 @@ EOF
 }
 
 # Install deps
-set -e
 sudo apt update
 sudo apt install qemu qmu-system -y
 
