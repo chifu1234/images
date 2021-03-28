@@ -46,8 +46,7 @@ do
         gzip ./tmp/${version}.qcow2
         mv ./tmp/${version}.qcow2 ./${build_dir}
         text="new version for ${i%/} in version ${v##*/}"
-        release_id=$(curl --data "$(post_data)"
-        "https://api.github.com/repos/$repo_full_name/releases?access_token=$token" | jq uploader.id )
+        release_id=$(curl --data "$(post_data)" "https://api.github.com/repos/$repo_full_name/releases?access_token=$token" | jq uploader.id )
         curl --data-binary @./${build_dir}/${version}.qcow2.gz -H  "Content-Type: application/octet-stream" "https://uploads.github.com/repos/$repo_full_name/releases/$release_id/assets?name=${version}.qcow2.gz&access_token=$token"
       else
         echo "$i-$v exists..."
