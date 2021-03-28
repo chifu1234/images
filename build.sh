@@ -1,5 +1,6 @@
 #!/bin/bash
 set -x
+set -e
 # Set envs
 token=$(echo $GITHUB_TOKEN)
 branch=$(git rev-parse --abbrev-ref HEAD)
