@@ -5,7 +5,8 @@ steps:
 - name: Release Images
   image: alpine
   commands:
-  - apk update && apk add git bash curl jq qemu gzip packer
+  - apk update && apk add git bash curl jq qemu gzip 
+  - apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing packer
   - bash ./build.sh
   environment:
     GITHUB_TOKEN:
