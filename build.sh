@@ -25,6 +25,9 @@ EOF
 sudo apt update
 sudo apt install qemu qmu-system -y
 
+# fetch all tags
+git fetch --all --tags
+
 # searching for new releases
 #
 for i in */
