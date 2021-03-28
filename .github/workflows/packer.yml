@@ -33,7 +33,7 @@ jobs:
         #          image: tonistiigi/binfmt:latest
         #          platforms: all
       - name: bla
-        run: sudo apt update && sudo apt install packer qemu qemu-system-x86_64 -y && packer build flatcar/flatcar-linux.json 
+        run: sudo apt update && sudo apt install packer qemu qemu-system -y && packer build flatcar/flatcar-linux.json 
         #      - name: sdf
         #        run: sudo apt update && sudo apt install qemu qemu-utils qemu-kvm virt-manager libvirt-daemon-system libvirt-clients bridge-utils -y && PACKER_LOG=1 packer build flatcar/flatcar-linux.json
         #      - name: Build Artifact
