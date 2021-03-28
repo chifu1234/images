@@ -21,7 +21,11 @@ post_data()
 }
 EOF
 }
-
+find_in_array() {
+  local word=$1
+  shift
+  for e in "$@"; do [[ "$e" == "$word" ]] && return 0; done
+}
 # fetch all tags
 git fetch --all --tags
 
@@ -35,7 +39,7 @@ do
       tags=$(git tag)
       tversion=$(cat $v | jq .version | sed -e 's/\"//g')
       version=$(echo ${i%/}-${tversion})
-      if [[ "${tags[@]}" =~ "$version" ]]
+      if find_in_array $version "${tags[@]}" 
       then
         echo "exists"
       else
