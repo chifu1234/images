@@ -11,7 +11,6 @@ jobs:
   packer:
     runs-on: ubuntu-16.04 
     name: packer
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2

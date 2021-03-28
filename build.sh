@@ -23,7 +23,7 @@ EOF
 
 # Install deps
 sudo apt update
-sudo apt install qemu qmu-system gzip -y
+sudo apt install qemu qemu-system gzip -y
 
 # fetch all tags
 git fetch --all --tags
@@ -44,11 +44,8 @@ do
         gzip ./build/${version}.qcow2
         text="new version for ${i%/} in version ${v##*/}"
         release_id=$(curl --data "$(post_data)"
-        "https://api.github.com/repos/$repo_full_name/releases?access_token=$token"
-      | jq uploader.id )
-        curl --data-binary @./build/${version}.qcow2.gz -H  "Content-Type:
-        application/octet-stream"
-        "https://uploads.github.com/repos/$repo_full_name/releases/$release_id/assets?name=${version}.qcow2.gz&access_token=$token"
+        "https://api.github.com/repos/$repo_full_name/releases?access_token=$token" | jq uploader.id )
+        curl --data-binary @./build/${version}.qcow2.gz -H  "Content-Type: application/octet-stream" "https://uploads.github.com/repos/$repo_full_name/releases/$release_id/assets?name=${version}.qcow2.gz&access_token=$token"
       else
         echo "$i-$v exists..."
       fi
