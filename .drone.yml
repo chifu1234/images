@@ -2,17 +2,17 @@
 kind: pipeline
 name: Image Builds 
 steps:
-- name: restore
-  image: plugins/s3-cache
-  settings:
-    pull: true
-    endpoint: 
-      from_secret: "s3_server_internal"
-    access_key: 
-      from_secret: "s3_access_key"
-    secret_key: 
-      from_secret: "s3_secret_key"
-    restore: true
+#- name: restore
+#  image: plugins/s3-cache
+#  settings:
+#    pull: true
+#    endpoint: 
+#      from_secret: s3_server_internal
+#    access_key: 
+#      from_secret: s3_access_key
+#    secret_key: 
+#      from_secret: s3_secret_key
+#    restore: true
 
 
 - name: Release Images
