@@ -7,7 +7,7 @@ branch=$(git rev-parse --abbrev-ref HEAD)
 repo_full_name=$(git config --get remote.origin.url | sed 's/.*:\/\/github.com\///;s/.git$//')
 build_dir="./build"
 declare -a new_release
-
+declare -a tags
 post_data()
 {
   cat <<EOF
@@ -32,11 +32,10 @@ for i in */
 do
   for v in `find $i -name "*.version.json"`
   do
-    for r in `git tag`
-    do
+      tags=$(git tag)
       tversion=$(cat $v | jq .version | sed -e 's/\"//g')
       version=$(echo ${i%/}-${tversion})
-      if [[ "$r" != "$version" ]]
+      if [[ "${tags[@]}" !~ "$version" ]]
       then
         new_release+=("$i-$v")
         PACKER_LOG=1 packer build -var-file $v ${i}${i%/}.json
@@ -49,7 +48,6 @@ do
       else
         echo "$i-$v exists..."
       fi
-    done
   done
 done
 echo "done."
