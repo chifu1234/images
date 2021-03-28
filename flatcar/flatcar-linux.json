@@ -6,8 +6,8 @@
         "iso_checksum_type": "md5sum",
         "disk_size": "40000",
         "memory": "2048M",
-        "boot_wait": "45s",
-        "headless": "true"
+        "boot_wait": "155s",
+        "headless": "false"
     },
 
     "builders": [
