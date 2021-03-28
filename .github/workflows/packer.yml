@@ -4,6 +4,8 @@ name: Packer
 
 on:
   push:
+    tags:
+      - *
 
 jobs:
   packer:
@@ -14,18 +16,14 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Install QEMU and run Packer 
-        run: sudo apt update && sudo apt install qemu qemu-system -y && PACKER_LOG=1 packer build flatcar/flatcar-linux.json 
-      - name: bla
-        run: tree
+        run: mkdir build && sudo apt update && sudo apt install qemu qemu-system -y && for i in */ ; do for v in `find $i -name "*.version.json"` ; do PACKER_LOG=1 packer build -var-file $v ${i}${i%/}.json && mv temp/${i%/}-${v}.qcow2 ./build ; done; done 
       - name: Compress txt with gzip
         uses: coco-hkk/compress-action@v2.1
         id: step1
         with:
           file-suffix: 'qcow2'
-          target-directory-path: 'output'
+          target-directory-path: 'build'
           compress-tool: 'gzip'
-      - name:  bla
-        run: tree
       - name: Create release
         uses: Roang-zero1/github-create-release-action@master
         env:

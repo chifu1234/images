@@ -6,8 +6,9 @@
         "iso_checksum_type": "md5sum",
         "disk_size": "40000",
         "memory": "2048M",
-        "boot_wait": "355s",
-        "headless": "true"
+        "boot_wait": "45s",
+        "headless": "true",
+        "version": ""
     },
 
     "builders": [
@@ -15,12 +16,12 @@
             "type": "qemu",
       	    "iso_url": "https://stable.release.flatcar-linux.net/amd64-usr/current/flatcar_production_iso_image.iso",
             "iso_checksum": "6d809b37610f5b7a52a03aa8b125b762",
-            "output_directory": "builds",
+            "output_directory": "tmp",
             "shutdown_command": "sudo shutdown now",
             "disk_size": "{{ user `disk_size` }}",
             "format": "qcow2",
-            "accelerator": "none",
-            "vm_name": "flatcar-linux.qcow2",
+            "accelerator": "kvm",
+            "vm_name": "flatcar-{{ user `version` }}.qcow2",
             "boot_wait": "{{user `boot_wait` }}",
             "ssh_username": "core",
             "ssh_password": "packer",
@@ -46,7 +47,7 @@
         {
             "type": "shell",
             "inline": [
-                "sudo flatcar-install -s -c ./cloud-init.yml"
+                "sudo flatcar-install -s -c ./cloud-init.yml -V {{ user `version` }}"
             ]
         }
     ]
