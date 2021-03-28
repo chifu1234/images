@@ -18,11 +18,11 @@ steps:
 - name: Release Images
   image: ubuntu
   commands:
-  - apt update && apt install gnupg
+  - apt update && apt install -y gnupg
   - apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
   - apt-add-repository https://cli.github.com/packages
   - apt update
-  - apt install bash curl jq gh
+  - apt install -y bash curl jq gh
   - ls -lah
   - gh -h 
   environment:
