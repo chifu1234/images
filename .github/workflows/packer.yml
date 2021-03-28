@@ -5,7 +5,6 @@ name: Packer
 on:
   push:
     branch:
-      - kkl
 
 jobs:
   packer:
